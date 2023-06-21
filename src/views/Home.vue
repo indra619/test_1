@@ -4,7 +4,7 @@
                 <div class="my-2">
                   <v-row>
                     <v-col cols="12" sm="6">
-                      <span><h3 bold> Input Pengajuan </h3> </span>
+                      <span><h2 bold> Personal Details </h2> </span>
                     </v-col>
                   </v-row>
 
@@ -12,7 +12,7 @@
                     <v-col cols="12" sm="6">
                       <div>
 
-                        <span> NIK :  <v-text-field v-model="nik"
+                        <span> Wanted Job Title  <v-text-field v-model="nik"
                         solo
                         >
                         </v-text-field>
@@ -24,20 +24,44 @@
 
                   
                     <v-col cols="12" sm="6">
+                      
+                      <img id="Preview_image_create" class="Preview_image">
+                      <v-file-input
+                        v-on:change="Preview_image($event)"
+                        label='Upload Picture'
+                        ></v-file-input>
 
-                      <span> Nama Karyawan: <v-text-field v-model="nama_kary"
-                        solo
-                        >
-                        </v-text-field>
-                      </span>
 
                     </v-col>
                   </v-row>
 
                   <v-row>
                     <v-col cols="12" sm="6">
+                      <div>
 
-                      <span> Email:<v-text-field v-model="statusKerja"
+                        <span> First Name <v-text-field v-model="Tanggal_diangkatTetap"
+                        solo
+                        >
+                        </v-text-field>
+                      </span>
+
+                      </div>
+                    </v-col>
+
+                    <v-col cols="12" sm="6">
+
+                      <span> Last Name <v-text-field v-model="PT"
+                        solo
+                        >
+                        </v-text-field>
+                      </span>
+
+                
+              </v-col>
+
+                    <v-col cols="12" sm="6">
+
+                      <span> Email <v-text-field v-model="statusKerja"
                         solo
                         :rules="emailRules"
                         >
@@ -49,44 +73,49 @@
                   
                     <v-col cols="12" sm="6">
 
-                      <span> Tanggal Lahir: <v-text-field v-model="Tanggal_Lahir"
+                      <span> Phone <v-text-field v-model="Tanggal_Lahir"
                         solo
+                        v-on:keypress="isNumber($event)"
                         >
                         </v-text-field>
                       </span>
 
                       
                     </v-col>
+
+                    <v-col cols="12" sm="6">
+                    <span>Country </span>
+                      <v-autocomplete
+                      v-model="approval1"
+                      :items="atasanApproval1"
+                      item-text="data"
+                      item-value="data"
+                      dense
+                      outlined
+                      @change="assignCity"
+                    ></v-autocomplete>
+                      </v-col>
+
+                      <v-col cols="12" sm="6">
+                        <span>City </span>
+                      <v-autocomplete
+                      v-model="approval2"
+                      :items="atasanApproval2"
+                      item-text="data"
+                      item-value="data"
+                      dense
+                      outlined
+                    ></v-autocomplete>
+                      </v-col>
+
                   </v-row>
 
                   <v-row>
 
-                    <v-col cols="12" sm="6">
-                      <div>
-
-                        <span> Tanggal Tetap: <v-text-field v-model="Tanggal_diangkatTetap"
-                        solo
-                        >
-                        </v-text-field>
-                      </span>
-
-                      </div>
-                    </v-col>
-
-                    <v-col cols="12" sm="6">
-
-                      <span> Unit: <v-text-field v-model="PT"
-                        solo
-                        >
-                        </v-text-field>
-                      </span>
-
-                
-              </v-col>
 
               <v-col cols="12" sm="6" >
 
-                <span> Departement: <v-text-field v-model="Departemen"
+                <span> Address  <v-text-field v-model="Departemen"
                         solo
                         >
                         </v-text-field>
@@ -98,7 +127,7 @@
 
               <v-col cols="12" sm="6">
 
-                <span> Cabang: <v-text-field v-model="Cabang"
+                <span> Postal Code <v-text-field v-model="Cabang"
                         solo
                         >
                         </v-text-field>
@@ -108,7 +137,7 @@
 
                     <v-col cols="12" sm="6">
 
-                <span> Jabatan: <v-text-field v-model="Jabatan"
+                <span> Driving License <v-text-field v-model="Jabatan"
                         solo
                         >
                         </v-text-field>
@@ -118,7 +147,7 @@
 
                     <v-col cols="12" sm="6">
 
-                <span> Job Class: <v-text-field v-model="jobClass"
+                <span> Nationality <v-text-field v-model="jobClass"
                         solo
                         >
                         </v-text-field>
@@ -128,249 +157,276 @@
 
                     <v-col cols="12" sm="6">
 
-                      <span> Alamat KTP:<v-textarea v-model="alamatKtp"
+                      <span> Place Of Birth <v-text-field v-model="alamatKtp"
                       auto-grow
                       
                       solo
                         >
-                        </v-textarea>
+                        </v-text-field>
                       </span>
                       
                     </v-col>
 
                     <v-col cols="12" sm="6">
 
-                    <span> Alamat Domisili: <v-textarea v-model="alamatDomisili"
+                    <span> Date Of Birth <v-text-field v-model="alamatDomisili"
                     auto-grow
                     
                     solo
                         >
-                        </v-textarea>
-                      </span>
-                      
-                    </v-col>
-
-                    <v-col cols="12" sm="6">
-
-                <span> No. HP: <v-text-field v-model="phoneNumber"
-                        solo
-                        >
-                        </v-text-field>
-                      </span>
-                    </v-col>
-                    
-
-                    <v-col cols="12" sm="6">
-                    <v-card-text>
-                      <h2
-                        class="subtitle-1 font-weight-regular text-justify"
-                      >Pengajuan KPR</h2>
-
-                      <v-radio-group v-model="dataPengajuan" row
-                      :disabled="this.status == 'Failed' || this.nik_atasan == null && this.nama_atasan == null">
-                        <!-- <v-radio
-                          v-for="item in itemJawab"
-                          :key="item.id"
-                          :label="`${item.name}`"
-                          :value="item.id"
-                        ></v-radio> -->
-                        <v-radio
-                        label="Diri Sendiri"
-                        value="1"
-                        >
-
-                        </v-radio>
-                        <v-radio
-                        label="Dengan Pasangan"
-                        value="2"
-                        :disabled="this.statusNikah =='Belum Menikah' || this.statusNikah =='Janda/Duda' ||this.statusNikah == 'Duda/Janda' ">
-
-                        </v-radio>
-                      </v-radio-group>
-                    </v-card-text>
-
-                    <h5 class="red--text">*Untuk Status Belum Menikah Maksimal Penghasilan 6 Juta</h5> <br>
-                    <h5 class="red--text"> Untuk Status Menikah Maksimal Penghasilan 8 Juta</h5>
-                    
-
-                    </v-col>
-                    
-                    <v-col cols="12" sm="6"  v-show="dataPengajuan != ''">
-
-                    <span v-show="dataPengajuan != ''"> Input Jumlah Penghasilan Karyawan (Gaji yang diterima melalui transfer +i.saku) : <v-text-field v-model="tunjanganKaryawan"
-                        
-                        :rules="dataPengajuan == '1' &&['Belum Menikah','Duda/Janda','Janda/Duda'].includes(statusNikah)  ? pasanganRulesIsSendiri : pasanganRulesIsPasangan"
-                        v-on:keypress="isNumber($event)"
-                        label="Rp."
-                        v-show="dataPengajuan != '' "> 
                         </v-text-field>
                       </span>
                       
                     </v-col>
 
-                    <v-col cols="12" sm="6" v-show="dataPengajuan == '2'">
-
-                    <span  v-show="dataPengajuan == '2'"> Input Jumlah Penghasilan Pasangan (Gaji + Tunjangan) : <v-text-field v-model="tunjanganPasangan"
-                        
-                        :rules="pasanganRulesIsPasangan"
-                        v-on:keypress="isNumber($event)"
-                        v-show="dataPengajuan == '2'"
-                        label="Rp.">
-                        </v-text-field>
+                  <v-row>
+                    <v-col cols="12" sm="12">
+                      <span><h2 bold> Professional Summary </h2> </span>
+                      <span>
+                        Write 2-4 Short & Energetic Sentence
                       </span>
-                      
-                    </v-col>
+                      <v-tiptap
+                    v-model="valueEdt"
+                    :toolbar="['bold', 'italic', 'underline' ,'strike' ,'color' , '|', 'h1','h2' ,'h3' , 'p','|' , 'left' , 'right' , 'center' ,'|' ,'emoji' , 'image','>', '#sendbutton', '#mybutton']"
+                    :uploadImage="uploadImage"
+                    >
+                    <template #mybutton="{ editor }">
+                    <v-btn icon small title="Clear Content" @click="editor.commands.clearContent()">
+                    <v-icon>mdi-delete-circle-outline</v-icon>
+                    </v-btn>
+                    </template>
+                    </v-tiptap>
 
+                    </v-col>
+                  </v-row>
+                  </v-row>
+
+                <v-row>
                     <v-col cols="12" sm="6">
-                      <span>Jangka Waktu KPR(Bulan)</span>
-                      <v-select
-                      v-model="lamaKPR"
-                      :items="bulanKPR"
-                      :disabled="this.status == 'Failed' || this.nik_atasan == null && this.nama_atasan == null"
-                      dense
-                      outlined
-                    ></v-select>
-
-                    <h5 class="red--text">*
-                    1. File Upload Tidak boleh Lebih dari 1 MB dan Berformat Gambar (JPEG,JPG,PNG)!</h5><br/>
-                    <h5 class="red--text">
-                    2. Slip Penghasilan Berupa Printscreen / Screenshoot yang berasal dari Slip Penghasilan yang diberikan payroll!</h5><br/>
-                    <h5 class="red--text">
-                    3. Mohon Pastikan Gambar Terlihat Jelas dan Tidak Corrupt!</h5>
-
-                      </v-col>
-
-                    <v-col cols="12" sm="6">
-                      <v-btn 
-                      :href="this.$baseurl + `kpr/getSuratPernyataanKPR?nik=${nik}&namaktp=${nama_kary}&nomorktp=${nomorktp}&alamatktp=${alamatKtp}`" download>
-                        Download Surat Pernyataan
-                      </v-btn>
+                      <span><h3 bold> Employment History </h3> </span>
                     </v-col>
-
-                    <v-col cols="12" sm="6">
-
-                      <h5 class="red--text">* Untuk Scan Document / Foto Mohon Menggunakan Applikasi CAMSCANNER! (Download Applikasi Di Playstore)</h5>
-
-                  <v-file-input
-                  v-model="suratPernyataan"
-                  :rules="rules"
-                  :disabled="dataPengajuan == ''"
-                  ref="fileInput"
-                  show-size
-                  counter
-                  accept="image/jpeg, image/png, image/jpg"
-                  label="Upload Surat Pernyataan" 
-                ></v-file-input>
-
-                <h5 class="red--text">* File Upload Surat Pernyataan Belum Memiliki Rumah Berformat Gambar (JPEG,JPG,PNG)!</h5>
-
-                    </v-col>
-
-                    <v-col cols="12" sm="6" v-show="dataPengajuan != ''">
-
-                  <v-file-input
-                  v-show="dataPengajuan != ''"
-                  :rules="rules"
-                  :disabled="dataPengajuan == ''"
-                  show-size
-                  counter
-                  
-                  v-model="slipGajiKaryawan"
-                  accept="image/jpeg, image/png, image/jpg"
-                  label="Upload Slip Gaji Karyawan" 
-                ></v-file-input>
-
-                <h5 class="red--text">* File Upload Slip Penghasilan Karyawan Berformat Gambar (JPEG,JPG,PNG)!</h5>
-
-                    </v-col>
-
-                    <v-col cols="12" sm="6" v-show="dataPengajuan == '2'">
-
-                  <v-file-input
-                  v-show="dataPengajuan == '2'"
-                  :rules="rules"
-                  :disabled="dataPengajuan == ''"
-                  show-size
-                  counter
-                  
-                  v-model="slipGajiPasangan"
-                  accept= "image/jpeg, image/png, image/jpg"
-                  label="Upload Slip Gaji Pasangan" 
-                ></v-file-input>
-
-                 <h5 class="red--text">* File Upload Slip Penghasilan Pasangan Berformat Gambar (JPEG,JPG,PNG)!</h5>
-                 
-                    </v-col>
-
-                <v-col cols="12" sm="6">
-
-                          <span> Atasan ESS: <v-text-field v-model="Atasan"
-                        solo
-                        >
-                        </v-text-field>
-                      </span>
-                              
-                              </v-col>
-
+                  </v-row>
+                  <v-row v-for="(input, k) in inputsganjil" :key="k">
                   <v-col cols="12" sm="6">
-                    <span>Atasan Aproval 1</span>
-                      <v-autocomplete
-                      v-model="approval1"
-                      :items="atasanApproval1"
-                      item-text="APPROVAL1"
-                      item-value="APPROVAL1"
-                      dense
-                      label="Silahkan Pilih Atasan"
-                      :disabled="this.status == 'Failed'|| this.nik_atasan == null && this.nama_atasan == null"
-                      outlined
-                      @change="getAtasanApproval2Data"
-                    ></v-autocomplete>
-                      </v-col>
+                    <v-container>
+                    <v-expansion-panels>
+              <v-expansion-panel>
+              <v-expansion-panel-header>
+            <template v-slot:default="{ open }">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <v-fade-transition leave-absolute>
+                <span
+                  v-if="open"
+                  key="0"
+                >
+                  Enter Position
+                </span>
+                <span
+                v-else
+                  key="1">
+              Position:
+               <div><h3>{{ input.name }}</h3></div>
+                </span>
+              </v-fade-transition>
+            </v-col>
+            <v-col
+              cols="8"
+              class="text--secondary"
+            >
+              <v-fade-transition leave-absolute>
+                <span
+                  v-if="open"
+                  key="0"
+                >
+                  Enter Year
+                </span>
+                <span
+                  v-else
+                  key="1"
+                >
+                Year {{ input.year }}
+                </span>
+              </v-fade-transition>
+            </v-col>
+          </v-row>
+        </template>
+      </v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-text-field
+          v-model="input.name"
+          placeholder="Type Data"
+        >  </v-text-field>
+        <v-text-field
+          v-model="input.year"
+          placeholder="Type Data"
+        >  </v-text-field>
 
-                      <v-col cols="12" sm="6">
-                        <span>Atasan Aproval 2</span>
-                      <v-autocomplete
-                      v-model="approval2"
-                      :items="atasanApproval2"
-                      item-text="APPROVAL2"
-                      item-value="APPROVAL2"
-                      label="Silahkan Pilih Atasan"
-                      dense
-                      :disabled="this.status == 'Failed'||this.nik_atasan == null && this.nama_atasan == null"
-                      outlined
-                      @change="getAtasanApproval3Data"
-                    ></v-autocomplete>
-                      </v-col>
+        
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+                    </v-expansion-panels>
+                    </v-container>
 
-                      <v-col cols="12" sm="6" v-show="validateAtasan3">
-                        <span v-show="validateAtasan3">Atasan Aproval 3</span>
-                      <v-autocomplete
-                      v-model="approval3"
-                      :items="atasanApproval3"
-                      item-text="APPROVAL3"
-                      item-value="APPROVAL3"
-                      dense
-                      label="Silahkan Pilih Atasan"
-                      :disabled="this.status == 'Failed'&& this.validateAtasan3 || this.nik_atasan == null && this.nama_atasan == null"
-                      v-show="validateAtasan3"
-                      outlined
-                    ></v-autocomplete>
-                      </v-col>
+
+                    <v-btn
+                                  class="mx-2"
+                                  fab
+                                  dark
+                                  small
+                                  color="primary"
+                                  v-show="k || (!k && inputsganjil.length > 1)"
+                                  @click="removeGanjil(k)"
+                                >
+                                  <v-icon dark>
+                                    mdi-close
+                                  </v-icon>
+                                </v-btn>
+
+                                <v-btn
+                                  class="mx-2"
+                                  
+                                  dark
+                                  
+                                  color="primary"
+                                  v-show="k == inputsganjil.length - 1"
+                                  @click="addGanjil(k)"
+                                >
+                                Add Employment
+                                </v-btn>
+                  </v-col>
+
+                
+                </v-row>
+
+
+                <v-row>
+                    <v-col cols="12" sm="6">
+                      <span><h3 bold> Education History </h3> </span>
+                    </v-col>
+                  </v-row>
+                  <v-row v-for="(inpute, k) in inputsgenap" :key="k">
+                  <v-col cols="12" sm="6">
+                    <v-container>
+                    <v-expansion-panels>
+              <v-expansion-panel>
+              <v-expansion-panel-header>
+            <template v-slot:default="{ open }">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <v-fade-transition leave-absolute>
+                <span
+                  v-if="open"
+                  key="0"
+                >
+                  Enter Education
+                </span>
+                <span
+                v-else
+                  key="1">
+                  University:
+                <div><h3>{{ inpute.name }}</h3></div>
+                </span>
+              </v-fade-transition>
+            </v-col>
+            <v-col
+              cols="8"
+              class="text--secondary"
+            >
+              <v-fade-transition leave-absolute>
+                <span
+                  v-if="open"
+                  key="0"
+                >
+                  Enter Year
+                </span>
+                <span
+                  v-else
+                  key="1"
+                >
+                 Year {{ inpute.year }}
+                </span>
+              </v-fade-transition>
+            </v-col>
+          </v-row>
+        </template>
+      </v-expansion-panel-header>
+      <v-expansion-panel-content>
+        <v-text-field
+          v-model="inpute.name"
+          placeholder="Type Data"
+        ></v-text-field>
+        <v-text-field
+          v-model="inpute.year"
+          placeholder="Type Data"
+        ></v-text-field>
+
+       
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+                    </v-expansion-panels>
+                    </v-container>
+
+                     <v-btn
+                                  class="mx-2"
+                                  
+                                  dark
+                                  small
+                                  color="primary"
+                                  v-show="k || (!k && inputsgenap.length > 1)"
+                                  @click="removeGenap(k)"
+                                >
+                                  <v-icon dark>
+                                    mdi-close
+                                  </v-icon>
+                                </v-btn>
+
+                                <v-btn
+                                  class="mx-2"
+                                  
+                                  dark
+                                  
+                                  color="primary"
+                                  v-show="k == inputsgenap.length - 1"
+                                  @click="addGenap(k)"
+                                >
+                                  Add Education
+                                </v-btn>
+                  </v-col>
 
                 </v-row>
-    
 
-          <v-row justify="center">
-            <v-col cols="12" sm="6">
-          <v-btn @click="submitDataKPRData" color="primary"
-          
-          block
-          :loading="loading"
-          :disabled="this.status == 'Failed' || this.nik_atasan == null && this.nama_atasan == null"
-          v-show="validateInput && validateInputPasangan && validateInputAtasan"
-            >Submit</v-btn>
-          </v-col>
-            </v-row>
+
+             <v-row>
+                    <v-col cols="12" sm="6">
+                      <span><h3 bold> Skills </h3> </span>
+                    </v-col>
+                  </v-row>
+            <v-row>
+              <v-col>
+                <v-card>
+    <v-container fluid>
+      <v-row
+        align="center"
+      >
+        <v-col
+          cols="12"
+          sm="6"
+        >
+          <v-select
+            v-model="value"
+            :items="items"
+            attach
+            chips
+            label="Skills"
+            multiple
+          ></v-select>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-card>
+  </v-col>
+  </v-row>
             
 
                 </div>
@@ -381,6 +437,10 @@
 
 <script>
 // @ is an alias to /src
+async function uploadImage(file) {
+  const url = await myApi.upload(file);
+  return url;
+}
 
 export default {
   name: 'Home',
@@ -388,10 +448,12 @@ export default {
     
   },
 
-  data() {
 
+  data() {
+      
         
         return {
+          
 
         rules: [
         v => !!v ||  'File Harus Di isi',
@@ -400,6 +462,7 @@ export default {
         
         
       ],
+      
 
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -429,6 +492,13 @@ export default {
         month: [],
         day: []
       },
+
+      items: ['Vuejs', 'Java', 'C#', 'C++','Angular','JavaScript'],
+
+      value: [
+      ],
+
+      selected: [],
 
             status:"",
             // nikDecode:"",
@@ -475,11 +545,48 @@ export default {
             vloading:false,
             // valid: true,
 
-            atasanApproval1:[],
-            atasanApproval2:[],
+            atasanApproval1:[
+              {
+                data: "Indonesia"
+              },
+              {
+                data: "Thailand"
+              },{
+                data: "Singapore"
+              },{
+                data: "Malaysia"
+              },{
+                data: "Australia"
+              },
+            ],
+            atasanApproval2:[
+              {
+                data: "Jakarta"
+              },
+              {
+                data: "Bangkok"
+              },{
+                data: "Singapore"
+              },{
+                data: "Kuala Lumpur"
+              },{
+                data: "Victoria"
+              },
+            ],
             atasanApproval3:[],
 
-            suratPernyataan:[],
+            inputsganjil:[
+              {
+                name: "",
+                year: ""
+              }
+            ],
+            inputsgenap:[
+              {
+                name: "",
+                year: ""
+              }
+            ],
             suratPernyatanString:"",
             slipGajiKaryawan:[],
             gajiKaryawanString:"",
@@ -504,6 +611,76 @@ export default {
 
         }
     },
+
+    computed: {
+      allSelected () {
+        return this.selected.length === this.items.length
+      },
+      selections () {
+        const selections = []
+
+        for (const selection of this.selected) {
+          selections.push(selection)
+        }
+
+        return selections
+      },
+    },
+
+    methods: {
+            isNumber(n) {
+  let char = String.fromCharCode(n.keyCode); // Get the character
+  if(/^[0-9]+$/.test(char)) return true; // Match with regex 
+  else n.preventDefault(); // If not match, don't add to input text
+},
+
+      assignCity(){
+        if (this.atasanApproval1 == "Indonesia") {
+          this.atasanApproval2 == "Jakarta"
+          
+        } else if (this.atasanApproval1 == "Thailand") {
+          this.atasanApproval2 == "Bangkok"
+        }  else if (this.atasanApproval1 == "Singapore") {
+          this.atasanApproval2 == "Singapore"
+        }else if (this.atasanApproval1 == "Malaysia") {
+          this.atasanApproval2 == "Kuala Lumpur"
+        }else if (this.atasanApproval1 == "Australia") {
+          this.atasanApproval2 == "Victoria"
+        }
+      },
+
+      addGanjil() {
+      this.inputsganjil.push({
+        name: "",
+        year: "",
+      });
+    },
+
+     addGenap() {
+      this.inputsgenap.push({
+        name: "",
+        year: "",
+      });
+      // // console.log(this.inputs);
+    },
+
+    removeGanjil(index) {
+      this.inputsganjil.splice(index, 1);
+    },
+
+    removeGenap(index) {
+      this.inputsgenap.splice(index, 1);
+    },
+
+      Preview_image(e)
+    {
+        console.log(e);
+        if (e.target.files && e.target.files[0])
+        {
+          
+        }
+    }
+          },
 
 }
 </script>
