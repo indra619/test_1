@@ -27,6 +27,7 @@
                       
                       <img id="Preview_image_create" class="Preview_image">
                       <v-file-input
+                        v-model="image"
                         v-on:change="Preview_image($event)"
                         label='Upload Picture'
                         ></v-file-input>
@@ -635,17 +636,18 @@ export default {
 },
 
       assignCity(){
-        if (this.atasanApproval1 == "Indonesia") {
-          this.atasanApproval2 == "Jakarta"
+        console.log();
+        if (this.approval1 == "Indonesia") {
+          this.approval2 == "Jakarta"
           
-        } else if (this.atasanApproval1 == "Thailand") {
-          this.atasanApproval2 == "Bangkok"
-        }  else if (this.atasanApproval1 == "Singapore") {
-          this.atasanApproval2 == "Singapore"
-        }else if (this.atasanApproval1 == "Malaysia") {
-          this.atasanApproval2 == "Kuala Lumpur"
-        }else if (this.atasanApproval1 == "Australia") {
-          this.atasanApproval2 == "Victoria"
+        } else if (this.approval1 == "Thailand") {
+          this.approval2 == "Bangkok"
+        }  else if (this.approval1 == "Singapore") {
+          this.approval2 == "Singapore"
+        }else if (this.approval1 == "Malaysia") {
+          this.approval2 == "Kuala Lumpur"
+        }else if (this.approval1 == "Australia") {
+          this.approval2 == "Victoria"
         }
       },
 
@@ -677,7 +679,7 @@ export default {
         console.log(e);
         if (e.target.files && e.target.files[0])
         {
-          
+          this.image 
         }
     }
           },
